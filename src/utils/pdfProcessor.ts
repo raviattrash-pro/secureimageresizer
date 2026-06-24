@@ -30,7 +30,7 @@ export async function convertImagesToPdf(imageDataUrls: string[]): Promise<strin
   }
 
   const pdfBytes = await pdfDoc.save();
-  const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+  const blob = new Blob([pdfBytes as any], { type: 'application/pdf' });
   return URL.createObjectURL(blob);
 }
 
@@ -40,6 +40,6 @@ export async function compressPdf(file: File): Promise<string> {
   const arrayBuffer = await file.arrayBuffer();
   const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
   const pdfBytes = await pdfDoc.save();
-  const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+  const blob = new Blob([pdfBytes as any], { type: 'application/pdf' });
   return URL.createObjectURL(blob);
 }
