@@ -1,0 +1,206 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  /* LIGHT MODE VARIABLES */
+  --primary: #4F46E5;
+  --primary-hover: #4338CA;
+  
+  --bg-dark: #F0F4F8; /* Soft light background */
+  --bg-card: rgba(255, 255, 255, 0.75); /* Frosted glass */
+  --bg-input: rgba(255, 255, 255, 0.9);
+  
+  --text-light: #1E293B; /* Dark text for light mode */
+  --text-muted: #64748B;
+  
+  --border: rgba(15, 23, 42, 0.1);
+  --border-focus: rgba(79, 70, 229, 0.5);
+  
+  --accent: #0EA5E9;
+  --success: #10B981;
+  --error: #EF4444;
+  
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 25px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-neon: 0 0 15px rgba(79, 70, 229, 0.2);
+  
+  /* Background Mesh Colors */
+  --mesh-color-1: #e0e7ff;
+  --mesh-color-2: #f3e8ff;
+  --mesh-color-3: #e0f2fe;
+}
+
+[data-theme="dark"] {
+  /* DARK MODE VARIABLES (Neon Cyberpunk / Aurora) */
+  --primary: #6366F1;
+  --primary-hover: #818CF8;
+  
+  --bg-dark: #09090b; /* Very dark background */
+  --bg-card: rgba(24, 24, 27, 0.65); /* Dark frosted glass */
+  --bg-input: rgba(9, 9, 11, 0.8);
+  
+  --text-light: #F8FAFC;
+  --text-muted: #94A3B8;
+  
+  --border: rgba(255, 255, 255, 0.08);
+  --border-focus: rgba(99, 102, 241, 0.5);
+  
+  --accent: #38BDF8;
+  --success: #10B981;
+  --error: #EF4444;
+  
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 20px 40px -5px rgba(0, 0, 0, 0.4), 0 0 40px rgba(99, 102, 241, 0.1);
+  --shadow-neon: 0 0 20px rgba(99, 102, 241, 0.4);
+  
+  /* Background Mesh Colors */
+  --mesh-color-1: #1e1b4b;
+  --mesh-color-2: #312e81;
+  --mesh-color-3: #0f172a;
+}
+
+[data-theme="zen"] {
+  /* ZEN MODE VARIABLES (Glowing Peach Neumorphism) */
+  --primary: #E86A33;
+  --primary-hover: #D45821;
+  
+  --bg-dark: #FFDFBA; /* Base warm peach */
+  --bg-card: rgba(255, 255, 255, 0.35); /* Translucent bright cream */
+  --bg-input: rgba(255, 255, 255, 0.2);
+  
+  --text-light: #5A4330;
+  --text-muted: #8c735d;
+  
+  --border: transparent;
+  --border-focus: transparent;
+  
+  --accent: #FF9B50;
+  --success: #65B741;
+  --error: #EF4444;
+  
+  /* Neumorphic 3D Raised Shadows (Pure white top-left, Orange bottom-right) */
+  --shadow-sm: -4px -4px 12px rgba(255, 255, 255, 0.9), 4px 4px 12px rgba(210, 140, 90, 0.3);
+  --shadow-lg: -8px -8px 24px rgba(255, 255, 255, 1), 8px 8px 24px rgba(210, 140, 90, 0.35);
+  
+  /* Neumorphic 3D Pressed/Debossed Shadows (For inputs) */
+  --shadow-neon: inset 5px 5px 12px rgba(210, 140, 90, 0.35), inset -5px -5px 12px rgba(255, 255, 255, 0.9);
+  
+  /* Bright Peach/Orange background gradient */
+  --mesh-color-1: #FFE5C4;
+  --mesh-color-2: #FFC08A;
+  --mesh-color-3: #FFA559;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+  color: var(--text-light);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  
+  /* Animated Premium Mesh Background */
+  background-color: var(--bg-dark);
+  background-image: 
+    radial-gradient(at 0% 0%, var(--mesh-color-1) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, var(--mesh-color-2) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, var(--mesh-color-3) 0px, transparent 50%);
+  background-size: 200% 200%;
+  animation: bg-mesh 15s ease infinite alternate;
+  background-attachment: fixed;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+@keyframes bg-mesh {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 100%; }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-light);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+input, select {
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+/* =====================================================================
+   GLOBAL ZEN MODE OVERRIDES (NEUMORPHIC GLASS UI)
+   ===================================================================== */
+[data-theme="zen"] body {
+  background: linear-gradient(135deg, #FFE5C4 0%, #FFB070 100%);
+  background-attachment: fixed;
+}
+
+[data-theme="zen"] .app-container {
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 2rem;
+  box-shadow: -10px -10px 30px rgba(255, 255, 255, 0.8), 10px 10px 30px rgba(210, 140, 90, 0.4);
+}
+
+[data-theme="zen"] .dropzone-container,
+[data-theme="zen"] .custom-size-container,
+[data-theme="zen"] .category-header,
+[data-theme="zen"] .action-area {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: -5px -5px 15px rgba(255, 255, 255, 0.8), 5px 5px 15px rgba(210, 140, 90, 0.25);
+  border-radius: 1.5rem;
+}
+
+[data-theme="zen"] .search-input,
+[data-theme="zen"] .custom-size-container input,
+[data-theme="zen"] .custom-size-container select {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 1rem;
+  box-shadow: inset 4px 4px 10px rgba(210, 140, 90, 0.3), inset -4px -4px 10px rgba(255, 255, 255, 0.9);
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+[data-theme="zen"] .search-input:focus,
+[data-theme="zen"] .custom-size-container input:focus,
+[data-theme="zen"] .custom-size-container select:focus {
+  box-shadow: inset 6px 6px 12px rgba(210, 140, 90, 0.4), inset -6px -6px 12px rgba(255, 255, 255, 1);
+  background: rgba(255, 255, 255, 0.25);
+}
+
+[data-theme="zen"] .process-button,
+[data-theme="zen"] .download-btn {
+  background: #E86A33;
+  color: white;
+  border-radius: 2rem;
+  box-shadow: -4px -4px 10px rgba(255, 255, 255, 0.8), 4px 4px 10px rgba(210, 140, 90, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="zen"] .process-button:hover:not(:disabled),
+[data-theme="zen"] .download-btn:hover {
+  box-shadow: inset 4px 4px 10px rgba(0, 0, 0, 0.1), inset -4px -4px 10px rgba(255, 255, 255, 0.3);
+  transform: translateY(1px);
+}
+
+[data-theme="zen"] .preview-card {
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: -5px -5px 15px rgba(255, 255, 255, 0.8), 5px 5px 15px rgba(210, 140, 90, 0.3);
+  border-radius: 1.5rem;
+}
