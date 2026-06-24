@@ -18,6 +18,11 @@
     "react-image-crop": "^11.1.2",
     "onnxruntime-web": "^1.17.1"
   },
+  "overrides": {
+    "vite-plugin-pwa": {
+      "vite": "$vite"
+    }
+  },
   "devDependencies": {
     "@types/node": "^24.13.2",
     "@types/react": "^19.2.17",
