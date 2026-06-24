@@ -9,6 +9,9 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg'],
+      workbox: {
+        maximumFileSizeToCacheInBytes: 40000000
+      },
       manifest: {
         name: 'Image Resizer & Enhancer',
         short_name: 'ImageResizer',
