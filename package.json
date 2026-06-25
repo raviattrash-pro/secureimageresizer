@@ -11,12 +11,13 @@
   },
   "dependencies": {
     "@imgly/background-removal": "^1.7.0",
+    "@vercel/analytics": "^2.0.1",
     "@vladmandic/face-api": "^1.7.15",
+    "onnxruntime-web": "^1.17.1",
     "pdf-lib": "^1.17.1",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
-    "react-image-crop": "^11.1.2",
-    "onnxruntime-web": "^1.17.1"
+    "react-image-crop": "^11.1.2"
   },
   "overrides": {
     "vite-plugin-pwa": {

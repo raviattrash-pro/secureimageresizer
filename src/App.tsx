@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import './App.css';
 import { categories } from './data/categories';
 import type { Category } from './data/categories';
@@ -358,6 +359,7 @@ function App() {
           />
         )}
       </main>
+      <Analytics />
     </div>
   );
 }
