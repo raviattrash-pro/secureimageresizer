@@ -82,6 +82,23 @@ As a Software Architect with 30 years of experience, I have expanded the system 
 - **Client-Side Background Removal:**
   - Execute an edge segmentation model (e.g., U^2-Net or RMBG-1.4) via ONNX Runtime Web.
   - Extract the alpha mask, composite the subject over the required solid background color using HTML5 Canvas `globalCompositeOperation`.
+  - **Machine Learning Lifecycle:**
+    ```mermaid
+    stateDiagram-v2
+        [*] --> Initialize_ONNX_WebGPU
+        Initialize_ONNX_WebGPU --> Load_Model_Weights
+        Load_Model_Weights --> Tensor_Conversion
+        
+        state Tensor_Conversion {
+            Image_Data --> RGB_Float32Array
+            RGB_Float32Array --> Normalize_Pixels
+        }
+        
+        Tensor_Conversion --> Execute_Inference
+        Execute_Inference --> Alpha_Mask_Extraction
+        Alpha_Mask_Extraction --> Canvas_Compositing
+        Canvas_Compositing --> [*]
+    ```
 - **Strict Target Compression (Binary Search Algorithm):**
   - **Requirement:** Must be exactly under target size (e.g. 240KB).
   - **Algorithm Flow:**
@@ -254,6 +271,25 @@ Downloading a 10MB background removal model on every page load is unacceptable.
 - **Version Checking:** Compare the local model hash with a lightweight API endpoint (`GET /api/v1/models/manifest`).
 - **Cache Miss:** Download the `.onnx` files via `fetch()`, array buffer it, and save it to IndexedDB.
 - **Cache Hit:** Read the ArrayBuffer directly from IndexedDB and pass it to the ONNX Runtime Web session.
+- **Caching Flow Diagram:**
+  ```mermaid
+  sequenceDiagram
+      participant UI as Web App
+      participant IDB as IndexedDB (Browser)
+      participant CDN as Cloudflare Edge
+      
+      UI->>IDB: Request ONNX Model
+      alt Cache Hit (Model Exists)
+          IDB-->>UI: Return ArrayBuffer
+          UI->>UI: Load into ONNX WebGPU
+      else Cache Miss (First Visit / Update)
+          IDB-->>UI: Null
+          UI->>CDN: Fetch Model via HTTPs
+          CDN-->>UI: 10MB .onnx Blob
+          UI->>IDB: Save to Disk for Offline
+          UI->>UI: Load into ONNX WebGPU
+      end
+  ```
 - **Result:** Subsequent visits load the heavy AI models instantly from disk, reducing egress to near zero and allowing the app to function offline (as a PWA) once loaded.
 
 ---
