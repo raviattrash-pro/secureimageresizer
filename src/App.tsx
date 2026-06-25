@@ -11,6 +11,7 @@ import { ImageEditor } from './components/ImageEditor';
 import { processImage } from './utils/imageProcessor';
 import type { CropRect } from './utils/imageProcessor';
 import { convertImageToPdf, compressPdf, convertImagesToPdf } from './utils/pdfProcessor';
+import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(
@@ -358,6 +359,7 @@ function App() {
           />
         )}
       </main>
+      <Analytics />
     </div>
   );
 }
